@@ -23,7 +23,8 @@ defmodule MastodonClient.MixProject do
     [
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.18", optional: true},
-      {:jason, "~> 1.2", optional: true}
+      {:jason, "~> 1.2", optional: true},
+      {:ex_doc, ">= 0.24.2", only: :dev, runtime: false}
     ]
   end
 end
