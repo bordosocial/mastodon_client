@@ -30,20 +30,10 @@ defmodule MastodonClient do
   @spec new(Conn.t()) :: Tesla.Client.t()
   def new(%Conn{} = conn) do
     middleware = [
-      {Tesla.Middleware.Headers, [{"Content-Type", "application/json"}]},
       {Tesla.Middleware.BaseUrl, conn.instance},
+      {Tesla.Middleware.BearerAuth, token: conn.access_token},
       Tesla.Middleware.JSON
     ]
-
-    middleware =
-      if conn.access_token do
-        [
-          {Tesla.Middleware.Headers, [{"Authorization", "Bearer #{conn.access_token}"}]}
-          | middleware
-        ]
-      else
-        middleware
-      end
 
     Tesla.client(middleware)
   end
