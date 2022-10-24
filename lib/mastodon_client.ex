@@ -32,6 +32,7 @@ defmodule MastodonClient do
     middleware = [
       {Tesla.Middleware.BaseUrl, conn.instance},
       {Tesla.Middleware.BearerAuth, token: conn.access_token},
+      {Tesla.Middleware.Headers, [{"User-Agent", "Bordo/1 CFNetwork/1325.0.1 Darwin/21.1.0"}]},
       Tesla.Middleware.JSON
     ]
 
